@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DECApp</title>
+</head>
+<body>
+  <h1>Welcome to DECApp</h1>
+  <p>Meet Our Devs <br> The <span> students </span>  of Decagon <span> !</span>
+  </p>
+  <p>Already have an Account ? <a href="/decadev/loginpage">Login !</a></p>
+  <h4>Sign-up here (for Alumni and Current students of the program)</h4>
+  <form id="form">
+      <input type="text" name="firstName" id="firstName" placeholder="first-name" />
+      <br>
+      <input type="text" name="lastName" id="lastName" placeholder="last-name" />
+      <br>
+      <input type="text" name="squadNumber" id="squadNumber" placeholder="squad-number" />
+      <br>
+      <input type="text" name="stack" id="stack" placeholder="stack-name" />
+      <br>
+      <input type="text" name="linkedinLink" id="linkedinLink" placeholder="linkedin-link(optional)" />
+      <br>
+      <input type="text" name="email" id="email" placeholder="email" />
+      <br>
+      <input type="text" name="password" id="password" placeholder="password" />
+      <br>
+      <input type="submit" id="submit"/>
+      <br>
+  </form>
+  <script>
+
+    const form = document.getElementById('form');
+    form.onsubmit = async (e)=>{
+      e.preventDefault();
+      let response = await fetch('/users/usersignup', {
+        method: 'POST', 
+        headers:{
+          "Content-Type": 'application/json',
+        }, 
+
+        body: JSON.stringify({
+          firstName : document.getElementById('firstName').value,
+          lastName : document.getElementById('lastName').value,
+          squadNumber : document.getElementById('squadNumber').value,
+          stack : document.getElementById('stack').value,
+          linkedinLink : document.getElementById('linkedinLink').value,
+          email : document.getElementById('email').value,
+          password : document.getElementById('password').value,
+        })
+         ,
+      })
+      let res = await response.json;
+      
+      console.log(response.status, response.body);
+
+    };
+  </script>
+
+</body>
+</html>

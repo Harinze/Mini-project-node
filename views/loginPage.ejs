@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decapp-login</title>
+</head>
+<body>
+    <h4>Login to DECApp</h4>
+    <form id="form">
+        <input type="text" name="email" id="email" placeholder="email" />
+        <br>
+        <input type="text" name="password" id="password" placeholder="password" />
+        <br>
+        <input type="submit" id="submit"/>
+        <br>
+    </form> 
+    <script>
+        let form = document.getElementById('form');
+        form.onsubmit = async (e)=>{
+            e.preventDefault();
+            let response = await fetch('/users/userlogin', {
+        method: 'POST', 
+        headers:{
+          "Content-Type": 'application/json',
+        }, 
+
+        body: JSON.stringify({
+          email : document.getElementById('email').value,
+          password : document.getElementById('password').value,
+        })
+         ,
+      })
+      let res = await response.json();
+      console.log(res.token);
+      
+    }
+    </script>
+</body>
+</html>
